@@ -72,6 +72,33 @@ python scripts/smoke_test_variation.py
    - `OPENAI_API_KEY = your_api_key_here`
 5. Deploy.
 
+## Deploy on Railway
+
+This repo includes a `Dockerfile` that runs:
+
+```bash
+streamlit run app.py --server.address 0.0.0.0 --server.port $PORT
+```
+
+### Railway UI Steps
+
+1. Push your latest code to GitHub.
+2. In Railway, click `New Project`.
+3. Select `Deploy from GitHub repo`.
+4. Choose this repository.
+5. Railway will detect the `Dockerfile` and build automatically.
+6. Open your service, go to `Variables`, and add:
+   - `OPENAI_API_KEY` = your OpenAI API key
+   - `OPENAI_MODEL` = `gpt-5-mini` (or your preferred model)
+7. Go to `Settings` and ensure the service has a public domain (Railway can generate one).
+8. Redeploy (or trigger a new deploy) after adding variables.
+
+### Notes
+
+- Do not commit secrets; keep them in Railway Variables.
+- `PORT` is provided by Railway and is consumed by the Docker command.
+- If you rename the Streamlit entry file from `app.py`, update the `Dockerfile` command accordingly.
+
 ## Notes
 
 - Do not commit `.env` or API keys.
